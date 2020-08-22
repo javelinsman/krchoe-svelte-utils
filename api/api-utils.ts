@@ -28,7 +28,7 @@ export function getCookie(name: string): string {
 
 interface Prop {
   url: string
-  data?: any
+  data?: {[key: string]: any}
   option?: any
 }
 
@@ -46,13 +46,18 @@ export async function GET<T>({ url, option }: Prop) {
 export async function POST<T>({ url, data, option }: Prop) {
   // await ensure_csrf_cookie()
   // const csrftoken = getCookie('csrftoken')
+  const formData = new FormData()
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, value)
+  })
   const request: AxiosPromise<T>
-    = axios.post(url, data,
+    = axios.post(url, formData,
       {
         // withCredentials: true,
-        // headers: {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         //   'X-CSRFToken': csrftoken
-        // },
+        },
         ...option
       }
     )
@@ -67,7 +72,8 @@ export async function PUT<T>({ url, data, option }: Prop) {
       {
         // withCredentials: true,
         // headers: {
-        //   'X-CSRFToken': csrftoken
+          // 'Content-Type': 'multipart/form-data',
+          // 'X-CSRFToken': csrftoken
         // },
         ...option
       }
@@ -83,6 +89,7 @@ export async function DELETE<T>({ url, option }: Prop) {
       {
         // withCredentials: true,
         // headers: {
+          // 'Content-Type': 'multipart/form-data',
         //   'X-CSRFToken': csrftoken
         // },
         ...option
