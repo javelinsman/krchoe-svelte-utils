@@ -36,7 +36,7 @@ export async function GET<T>({ url, option }: Prop) {
   const request: AxiosPromise<T>
     = axios.get(url,
       {
-        // withCredentials: true,
+        withCredentials: true,
         ...option
       }
     )
@@ -53,7 +53,7 @@ export async function POST<T>({ url, data, option }: Prop) {
   const request: AxiosPromise<T>
     = axios.post(url, formData,
       {
-        // withCredentials: true,
+        withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',
         //   'X-CSRFToken': csrftoken
