@@ -70,7 +70,7 @@ export async function PUT<T>({ url, data, option }: Prop) {
   const request: AxiosPromise<T>
     = axios.put(url, data,
       {
-        // withCredentials: true,
+        withCredentials: true,
         // headers: {
           // 'Content-Type': 'multipart/form-data',
           // 'X-CSRFToken': csrftoken
@@ -87,7 +87,7 @@ export async function DELETE<T>({ url, option }: Prop) {
   const request: AxiosPromise<T>
     = axios.delete(url,
       {
-        // withCredentials: true,
+        withCredentials: true,
         // headers: {
           // 'Content-Type': 'multipart/form-data',
         //   'X-CSRFToken': csrftoken
